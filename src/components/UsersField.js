@@ -35,13 +35,22 @@ export default function UsersField({ users, room, name }) {
             </span>
             <span style={{ fontWeight: 600 }}>{room}</span> other users online (
             {users.length - 1}):
+            <p
+              style={
+                users.length - 1 === 0
+                  ? { fontWeight: 300, fontSize: ".9rem" }
+                  : { display: "none" }
+              }
+            >
+              seems like you alone here...
+            </p>
           </h2>
           <h4 className={classes.userNameList}>
             {users.map(({ name }) => {
-              if (userName !== name) {
+              if (userName.toLowerCase() !== name.toLowerCase()) {
                 return <div key={name}>{name}</div>;
               }
-              return null
+              return null;
             })}
           </h4>
         </div>

@@ -31,10 +31,10 @@ export default function UsersField({ users, room, name }) {
           </h1>
           <h2 style={{ fontWeight: 300 }}>
           &lt;
-            <span role="img" aria-label="emoji">
+            <span role="img" aria-label="emoji-chat">
               💬
             </span>
-            <span style={{ fontWeight: 600 }}>{room}</span> /&gt; users online (
+            <span style={{ fontWeight: 600 }}>{room}</span> /&gt;  users online (
             {users.length - 1}):
             <p
               style={
@@ -43,7 +43,7 @@ export default function UsersField({ users, room, name }) {
                   : { display: "none" }
               }
             >
-              seems like you alone here...
+              seems like you alone here... <span role="img" aria-label="emoji-ghost">👻</span>
             </p>
           </h2>
           <h4 className={classes.userNameList}>

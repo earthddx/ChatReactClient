@@ -34,7 +34,7 @@ export default function UsersField({ users, room, name }) {
             <span role="img" aria-label="emoji">
               💬
             </span>
-            <span style={{ fontWeight: 600 }}>{room}</span> /&gt; other users online (
+            <span style={{ fontWeight: 600 }}>{room}</span> /&gt; users online (
             {users.length - 1}):
             <p
               style={

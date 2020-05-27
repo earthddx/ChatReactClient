@@ -48,10 +48,17 @@ export default function AppInfo() {
     >
       <div className={classes.chatHeaderSm}>
         <h1>Chat App</h1>
-        <h4 style={
-        greaterThanMd
-          ? {}
-          : {display: 'none'}}>built with react, express, node and socket.io</h4>
+        <h4 style={greaterThanMd ? {} : { display: "none" }}>
+          built with react, express, node, socket.io ...{" "}
+        </h4>
+        <h4 style={greaterThanMd ? {} : { display: "none" }}>
+          ... and material-ui{" "}
+        </h4>
+        <h1 style={greaterThanMd ? {} : { display: "none" }}>
+          <span role="img" aria-label="emoji">
+            🤘
+          </span>
+        </h1>{" "}
       </div>
       <div className={classes.socialLinks}>
         <a href="https://github.com/earthddx" className={classes.link}>

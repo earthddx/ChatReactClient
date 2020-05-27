@@ -7,10 +7,18 @@ const useStyles = makeStyles((theme) => ({
   form: {
     display: "flex",
     width: "100%",
+    
+  },
+  textInput:{
+    fontFamily: 'Open Sans',
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: 5,
+    color: theme.palette.primary.text
   },
   input: {
     width: '80%',
-    padding: '10px'
+    padding: '10px',
+    
   },
   button:{
     width: '20%',
@@ -26,8 +34,8 @@ export default function InputField({ message, setMessage, sendMessage }) {
         <Input
           fullWidth
           autoComplete="off"
-          autoFocus="true"
-          className="input"
+          autoFocus={true}
+          className={classes.textInput}
           placeholder="enter a message.."
           value={message}
           onChange={(event) => setMessage(event.target.value)}

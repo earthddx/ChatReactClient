@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,25 +40,16 @@ export default function Login() {
     <form className={classes.root} noValidate autoComplete="off">
       <div className={classes.input}>
         <TextField
+          color="primary"
           className={classes.margin}
-          id="input-with-icon-textfield"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <AccountCircle />
-              </InputAdornment>
-            ),
-          }}
+          id="standard-basic"
           label="username"
           onChange={(event) => setUsername(event.target.value)}
         />
         <TextField
           className={classes.margin}
-          id="input-textfield"
-          InputProps={{
-            startAdornment: <InputAdornment position="start"></InputAdornment>,
-          }}
-          label="room"
+          id="standard"
+          label="channel"
           onChange={(event) => setRoom(event.target.value)}
         />
       </div>

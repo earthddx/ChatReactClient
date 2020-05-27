@@ -3,11 +3,13 @@ import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper } from "@material-ui/core";
+import { Paper, useMediaQuery } from "@material-ui/core";
 
 import Messages from "./Messages";
 import InfoBar from "./InfoBar";
 import InputField from "./InputField";
+import UsersField from "./UsersField";
+import AppInfo from "./AppInfo";
 
 let socket;
 
@@ -17,9 +19,26 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     margin: "20vh auto",
   },
-  paper: {
-    width: 400,
-    height: 400,
+  appInfoMd: {
+    display: "flex",
+  },
+  appInfoSm: {
+    display: "flex",
+    flexDirection: "column-reverse",
+  },
+
+  paperSm: {
+    width: 355,
+    height: 375,
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    //justifyContent: 'space-between',
+    paddingBottom: "60px",
+  },
+  paperMd: {
+    width: 440,
+    height: 440,
     position: "relative",
     display: "flex",
     flexDirection: "column",
@@ -30,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     bottom: 0,
     //right: 0,
-    width: 'inherit'
+    width: "inherit",
   },
 }));
 
@@ -39,7 +58,9 @@ export default function Chat({ location }) {
   const [room, setRoom] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const ENDPOINT = "localhost:4000";
+  const [users, setUsers] = useState("");
+  const ENDPOINT = "https://rens-chat-app.herokuapp.com/";
+  const greaterThanMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
   const classes = useStyles();
 
   useEffect(() => {
@@ -50,7 +71,11 @@ export default function Chat({ location }) {
     setName(name);
     setRoom(room);
 
-    socket.emit("join", { name, room }, () => {}); //on join, pass name and room to backend
+    socket.emit("join", { name, room }, (error) => {
+      if (error) {
+        alert(error);
+      }
+    }); //on join, pass name and room to backend
 
     return () => {
       socket.emit("disconnect");
@@ -64,7 +89,8 @@ export default function Chat({ location }) {
       setMessages((msgs) => [...msgs, message]);
     });
     socket.on("room", ({ users }) => {
-      setName(users);
+      setUsers(users);
+      console.log(users);
     });
   }, []);
 
@@ -77,23 +103,33 @@ export default function Chat({ location }) {
     }
   };
 
-  console.log(message, messages);
-
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <div className={classes.info}>
-          <InfoBar room={room} />
-        </div>
-        <Messages messages={messages} name={name} />
-        <div className={classes.input}>
-          <InputField
-            message={message}
-            setMessage={setMessage}
-            sendMessage={sendMessage}
-          />
-        </div>
-      </Paper>
+      <div
+        className={
+          greaterThanMd ? `${classes.appInfoMd}` : `${classes.appInfoSm}`
+        }
+      >
+        <AppInfo />
+        <Paper
+          className={
+            greaterThanMd ? `${classes.paperMd}` : `${classes.paperSm}`
+          }
+        >
+          <div className={classes.info}>
+            <InfoBar room={room} />
+          </div>
+          <Messages messages={messages} name={name} />
+          <div className={classes.input}>
+            <InputField
+              message={message}
+              setMessage={setMessage}
+              sendMessage={sendMessage}
+            />
+          </div>
+        </Paper>
+      </div>
+      {greaterThanMd && <UsersField users={users} room={room} name={name} />}
     </div>
   );
 }

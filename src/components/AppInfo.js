@@ -61,13 +61,23 @@ export default function AppInfo() {
         </h1>{" "}
       </div>
       <div className={classes.socialLinks}>
-        <a href="https://github.com/earthddx" className={classes.link}>
+        <a
+          href="https://github.com/earthddx"
+          rel="noopener noreferrer"
+          target="_blank"
+          className={classes.link}
+        >
           <GitHubIcon />
         </a>
-        <a href="https://twitter.com/ArtemMurzo" className={classes.link}>
+        <a
+          href="https://twitter.com/ArtemMurzo"
+          rel="noopener noreferrer"
+          target="_blank"
+          className={classes.link}
+        >
           <TwitterIcon />
         </a>
-      </div>
+      </div> 
     </div>
   );
 }

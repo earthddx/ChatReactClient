@@ -27,13 +27,14 @@ export default function UsersField({ users, room, name }) {
       {users ? (
         <div>
           <h1>
-            Hello, <span className={classes.userName}>{name}</span>!
+            Hello,  <span className={classes.userName}>{name}</span>!  
           </h1>
           <h2 style={{ fontWeight: 300 }}>
+          &lt;
             <span role="img" aria-label="emoji">
               💬
             </span>
-            <span style={{ fontWeight: 600 }}>{room}</span> other users online (
+            <span style={{ fontWeight: 600 }}>{room}</span> /&gt; other users online (
             {users.length - 1}):
             <p
               style={

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, useMediaQuery } from "@material-ui/core";
+import { Paper, useMediaQuery, CircularProgress } from "@material-ui/core";
 
 import Messages from "./Messages";
 import InfoBar from "./InfoBar";
@@ -129,7 +129,7 @@ export default function Chat({ location }) {
           </div>
         </Paper>
       </div>
-      {greaterThanMd && <UsersField users={users} room={room} name={name} />}
+      {greaterThanMd && users ? <UsersField users={users} room={room} name={name} />: <div style={{padding: 150}}><CircularProgress size="5rem" /></div>}
     </div>
   );
 }

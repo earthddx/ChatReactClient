@@ -129,7 +129,7 @@ export default function Chat({ location }) {
           </div>
         </Paper>
       </div>
-      {greaterThanMd && users ? <UsersField users={users} room={room} name={name} />: <div style={{padding: 150}}><CircularProgress size="5rem" /></div>}
+      {greaterThanMd && users ? <UsersField users={users} room={room} name={name} />: <div style={{padding: "0px 150px"}}><CircularProgress size="10rem" /></div>}
     </div>
   );
 }

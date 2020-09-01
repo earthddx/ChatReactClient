@@ -34,7 +34,7 @@ server.listen(PORT, () => console.log(`Server started on ${PORT}`));
 <li><code>eventName</code> (String)
 <li><code>args</code>
 <li><code>ack</code> (Function)
-<li>Returns Socket
+<li>Returns <code>Socket</code>
 </ul>
 
 Emits an event to the socket identified by the string name. Any other parameters can be included. All serializable datastructures are supported, including <code>Buffer</code>.
@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
 <ul>
 <li><code>eventName</code> (String)
 <li><code>callback</code> (Function)
-<li>Returns Socket
+<li>Returns <code>Socket</code>
 </ul>
 
 Register a new handler for the given event.
@@ -84,3 +84,31 @@ socket.on('news', (cb) => {
 });
 ```
 The socket actually inherits every method of the <u>Emitter</u> class, like <code>hasListeners</code>, <code>once</code> or <code>off</code> (to remove an event listener).
+
+## socket.join(room[, callback]) 
+Used on back-end in idnex.js file.
+<ul
+<li><code>room</code> (String)
+<li><code>callback</code> (Function)
+<li>Returns <code>Socket</code> for chaining
+ </ul>
+ Adds the client to the list of room, and fires optionally a callback with <code>err</code> signature (if any).
+ 
+ ```
+ io.on('connection', (socket) => {
+  socket.join(['room 237', 'room 238'], () => {
+    const rooms = Object.keys(socket.rooms);
+    console.log(rooms); // [ <socket.id>, 'room 237', 'room 238' ]
+    io.to('room 237').to('room 238').emit('a new user has joined the room'); // broadcast to everyone in both rooms
+  });
+});
+```
+
+## socket.disconnect()
+Synonym of <u>socket.close()</u>.
+
+## socket.close()
+<ul>
+<li>Returns <code>Socket</code>
+</ul> 
+Disconnects the socket manually.

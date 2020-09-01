@@ -64,7 +64,7 @@ export default function Chat({ location }) {
     //retrieve url back as an object
     const { name, channel } = queryString.parse(location.search);
 
-    socket = io("localhost:4000");
+    socket = io(ENDPOINT);
 
     setName(name);
     setChannel(channel);

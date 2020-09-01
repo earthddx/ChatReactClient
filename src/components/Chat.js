@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Chat({ location }) {
   const [name, setName] = useState("");
-  const [room, setRoom] = useState("");
+  const [channel, setChannel] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState("");
@@ -64,18 +64,18 @@ export default function Chat({ location }) {
   const classes = useStyles();
 
   useEffect(() => {
-    const { name, room } = queryString.parse(location.search); //retrieve url back as an object
+    const { name, channel } = queryString.parse(location.search); //retrieve url back as an object
 
-    socket = io(ENDPOINT);
+    socket = io("localhost:4000");
 
     setName(name);
-    setRoom(room);
+    setChannel(channel);
 
-    socket.emit("join", { name, room }, (error) => {
+    socket.emit("join", { name, channel }, (error) => {
       if (error) {
         alert(error);
       }
-    }); //on join, pass name and room to backend
+    }); //on join, pass name and channel to backend
 
     return () => {
       socket.emit("disconnect");
@@ -88,7 +88,7 @@ export default function Chat({ location }) {
     socket.on("message", (message) => {
       setMessages((msgs) => [...msgs, message]);
     });
-    socket.on("room", ({ users }) => {
+    socket.on("channel", ({ users }) => {
       setUsers(users);
       console.log(users);
     });
@@ -117,7 +117,7 @@ export default function Chat({ location }) {
           }
         >
           <div className={classes.info}>
-            <InfoBar room={room} />
+            <InfoBar channel={channel} />
           </div>
           <Messages messages={messages} name={name} />
           <div className={classes.input}>
@@ -130,7 +130,7 @@ export default function Chat({ location }) {
         </Paper>
       </div>
       {greaterThanMd && users ? (
-        <UsersField users={users} room={room} name={name} />
+        <UsersField users={users} channel={channel} name={name} />
       ) : (
         greaterThanMd && (
           <div style={{ padding: "0px 150px" }}>

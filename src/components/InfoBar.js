@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
  
 }));
 
-export default function InfoBar({ room }) {
+export default function InfoBar({ channel }) {
   const classes = useStyles();
   return (
     <div>
@@ -29,7 +29,7 @@ export default function InfoBar({ room }) {
             <FiberManualRecordTwoToneIcon color="secondary"/>
           </div>
           <div>
-            <h3 style={{ margin: 0 }}>{room}</h3>
+            <h3 style={{ margin: 0 }}>{channel}</h3>
           </div>
           <div>
             <a href="/" className={classes.link}>

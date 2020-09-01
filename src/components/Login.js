@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const [username, setUsername] = useState("");
-  const [room, setRoom] = useState("");
+  const [channel, setChannel] = useState("");
   const classes = useStyles();
 
   return (
@@ -50,14 +50,14 @@ export default function Login() {
           className={classes.margin}
           id="standard"
           label="channel"
-          onChange={(event) => setRoom(event.target.value)}
+          onChange={(event) => setChannel(event.target.value)}
         />
       </div>
       <Link
         className={classes.link}
-        to={`/chat?name=${username}&room=${room}`}
+        to={`/chat?name=${username}&channel=${channel}`}
         onClick={(event) =>
-          !username || !room ? event.preventDefault() : null
+          !username || !channel ? event.preventDefault() : null
         }
       >
         <Button

@@ -86,7 +86,10 @@ socket.on('news', (cb) => {
 The socket actually inherits every method of the <u>Emitter</u> class, like <code>hasListeners</code>, <code>once</code> or <code>off</code> (to remove an event listener).
 
 ## socket.join(room[, callback]) 
-Used on back-end in idnex.js file.
+Used in the back-end.
+```
+ socket.join(user.channel); //user gets inside of a channel
+ ```
 <ul
 <li><code>room</code> (String)
 <li><code>callback</code> (Function)
@@ -101,6 +104,21 @@ Used on back-end in idnex.js file.
     console.log(rooms); // [ <socket.id>, 'room 237', 'room 238' ]
     io.to('room 237').to('room 238').emit('a new user has joined the room'); // broadcast to everyone in both rooms
   });
+});
+```
+
+## Flag: ‘broadcast’
+Used in the back-end.
+```
+socket.broadcast.to(user.channel).emit("message", {
+      user: "admin", //<--admin generated message-->
+      text: `${user.name} has joined the chat!`,
+    });
+ ```
+ Sets a modifier for a subsequent event emission that the event data will only be broadcast to every sockets but the sender.
+ ```
+ io.on('connection', (socket) => {
+  socket.broadcast.emit('an event', { some: 'data' }); // everyone gets it but the sender
 });
 ```
 

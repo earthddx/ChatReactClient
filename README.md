@@ -12,7 +12,7 @@ This means that the server can push messages to clients. Whenever you write a ch
 <b>Socket.IO</b> is using this technolog (basically, anything that is real-time could be done in a pretty simple way with it).
 
 ## How to get server running 
-In order to get server running on your localhost you can do as simple as:
+In order to get server running on your localhost you can do something as simple as:
 ```
 const express = require("express");
 const socketio = require("socket.io");

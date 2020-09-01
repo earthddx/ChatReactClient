@@ -66,7 +66,7 @@ export default function Chat({ location }) {
   useEffect(() => {
     const { name, channel } = queryString.parse(location.search); //retrieve url back as an object
 
-    socket = io("localhost:4000");
+    socket = io(ENDPOINT);
 
     setName(name);
     setChannel(channel);

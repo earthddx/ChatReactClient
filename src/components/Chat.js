@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     display: "flex",
     flexDirection: "column",
-    //justifyContent: 'space-between',
     paddingBottom: "60px",
   },
   paperMd: {
@@ -42,13 +41,11 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     display: "flex",
     flexDirection: "column",
-    //justifyContent: 'space-between',
     paddingBottom: "60px",
   },
   input: {
     position: "absolute",
     bottom: 0,
-    //right: 0,
     width: "inherit",
   },
 }));
@@ -64,22 +61,26 @@ export default function Chat({ location }) {
   const classes = useStyles();
 
   useEffect(() => {
-    const { name, channel } = queryString.parse(location.search); //retrieve url back as an object
+    //retrieve url back as an object
+    const { name, channel } = queryString.parse(location.search);
 
-    socket = io(ENDPOINT);
+    socket = io("localhost:4000");
 
     setName(name);
     setChannel(channel);
 
+    // ***
+    //on join, pass name and channel to backend
     socket.emit("join", { name, channel }, (error) => {
       if (error) {
         alert(error);
       }
-    }); //on join, pass name and channel to backend
+    });
 
+    //clean up function
     return () => {
       socket.emit("disconnect");
-      socket.off();
+      socket.disconnect();
     };
   }, [ENDPOINT, location.search]);
 
@@ -88,13 +89,10 @@ export default function Chat({ location }) {
     socket.on("message", (message) => {
       setMessages((msgs) => [...msgs, message]);
     });
-    socket.on("channel", ({ users }) => {
+    socket.on("channelData", ({ users }) => {
       setUsers(users);
-      console.log(users);
     });
   }, []);
-
-  //func to send messages
 
   const sendMessage = (e) => {
     e.preventDefault();

@@ -65,6 +65,7 @@ export default function Login() {
           variant="contained"
           color="primary"
           className={classes.button}
+          disabled={!(username && channel)}
         >
           Sign in
         </Button>

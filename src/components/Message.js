@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import ReactEmoji from 'react-emoji'
+import ReactEmoji from "react-emoji";
 
 const useStyles = makeStyles((theme) => ({
   sentByUser: {
@@ -15,9 +15,9 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "5px",
     marginBottom: "5px",
     fontSize: "1.1rem",
-    display: 'inline-block',
-    maxWidth: '80%',
-    wordWrap: 'break-word',
+    display: "inline-block",
+    maxWidth: "80%",
+    wordWrap: "break-word",
     backgroundColor: theme.palette.secondary.main,
     borderRadius: "10px",
   },
@@ -33,10 +33,10 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 5px",
     marginLeft: "5px",
     marginBottom: "5px",
-    wordWrap: 'break-word',
+    wordWrap: "break-word",
     fontSize: "1.1rem",
-    display: 'inline-block',
-    maxWidth: '80%',
+    display: "inline-block",
+    maxWidth: "80%",
     backgroundColor: "#8c8c8c",
     borderRadius: "10px",
   },
@@ -53,9 +53,9 @@ export default function Message({ message: { user, text }, name }) {
   let isSentByAdmin = false;
   const trimmedName = name.trim().toLowerCase();
 
-   if (user === trimmedName) {
-     isSentByCurrUser = true;
-   }
+  if (user === trimmedName) {
+    isSentByCurrUser = true;
+  }
 
   if (user === "admin") {
     isSentByAdmin = true;
@@ -63,15 +63,30 @@ export default function Message({ message: { user, text }, name }) {
   return !isSentByAdmin ? (
     isSentByCurrUser ? (
       <div className={classes.sentByUser}>
-        {/* <p className={classes.userName}>{trimmedName}</p> */}
         <div className={classes.userText}>
-          <p style={{ margin: 3, wordWrap: "break-word", fontFamily: 'Open Sans' }}>{ReactEmoji.emojify(text)}</p>
+          <p
+            style={{
+              margin: 3,
+              wordWrap: "break-word",
+              fontFamily: "Open Sans",
+            }}
+          >
+            {ReactEmoji.emojify(text)}
+          </p>
         </div>
       </div>
     ) : (
       <div className={classes.notSentByUser}>
         <div className={classes.otherText}>
-          <p style={{ margin: 2, wordWrap: "break-word", fontFamily: 'Open Sans' }}>{ReactEmoji.emojify(text)}</p>
+          <p
+            style={{
+              margin: 2,
+              wordWrap: "break-word",
+              fontFamily: "Open Sans",
+            }}
+          >
+            {ReactEmoji.emojify(text)}
+          </p>
         </div>
         <p className={classes.otherName}>{user}</p>
       </div>

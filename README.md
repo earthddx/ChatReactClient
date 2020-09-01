@@ -9,7 +9,7 @@ In short, it allows instant messaging and chat.
 <b>Socket.IO</b>'s "Hello world" is a chat app in just a few lines of code.
 Sockets have traditionally been the solution around which most real-time chat systems are architected, providing a bi-directional communication channel between a client and a server.
 This means that the server can push messages to clients. Whenever you write a chat message, the idea is that the server will get it and push it to all other connected clients.
-<b>Socket.IO</b> is using this technolog (basically, anything that is real-time could be done in a pretty simple way with it).
+<b>Socket.IO</b> is using this technology (basically, anything that is real-time could be done in a pretty simple way with it).
 
 ## How to get server running 
 In order to get server running on your localhost you can do something as simple as:
